@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Todo List</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <div class="col-lg-offset-4 col-md-4">
+        <div class="main fl-l">
+            <div class="list-todo" id="list-todo">
+
+            </div>
+            <input class="form-control inp" type="text" id="name-todo" placeholder="Name" />
+            <button class="btn btn-primary btn-add" id="btn-add">Add</button>
+        </div>
+        <div class="cl fl-l" id="toolbar">
+            <div class="btn-tools" id="btn-up">Up</div>
+            <div class="btn-tools" id="btn-down">Down</div>
+            <div class="btn-tools" id="btn-save">Save</div>
+            <div class="btn-tools" id="btn-delete">Delete</div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/scriptUI.js"></script>
+</body>
+</html>
