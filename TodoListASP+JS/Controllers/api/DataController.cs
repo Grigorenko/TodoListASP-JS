@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using TodoListASP_JS.Models;
 
 namespace TodoListASP_JS.Controllers
 {
@@ -18,27 +19,41 @@ namespace TodoListASP_JS.Controllers
         }
 
         [HttpGet]
-        public void Add(string todo)
+        public string GetById([FromUri] int id)
+        {
+            return context.GetById(id);
+        }
+
+        [HttpPost]
+        public void Add([FromUri] string todo)
         {
             context.Add(todo);
         }
 
-        [HttpGet]
-        public void Edit(string oldTodo, string newTodo)
+        [HttpPost]
+        public void Edit([FromUri] string oldTodo, [FromUri] string newTodo)
         {
             context.Edit(oldTodo, newTodo);
         }
 
         [HttpGet]
-        public void Delete(string todo)
+        public void Delete([FromUri] string todo)
         {
             context.Delete(todo);
         }
 
         [HttpGet]
-        public void Replace(ICollection<string> list)
+        public void Remove([FromUri] string todo, [FromUri] bool direction)
         {
-            context.Replace(list);
+            if (direction)//down
+            {
+                context.RemoveDown(todo);
+            }
+            else//up
+            {
+                context.RemoveUp(todo);
+            }
         }
+
     }
 }
