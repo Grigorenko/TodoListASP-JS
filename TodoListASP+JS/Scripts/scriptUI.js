@@ -1,5 +1,4 @@
-﻿
-getAllList();
+﻿getAllList();
 
 function fillUL(todos) {
     $('.todoId').remove();
@@ -12,10 +11,8 @@ function fillUL(todos) {
 $('body').on('click', '#btn-add', function (e) {
     var name = $('#name-todo').val();
     $('#name-todo').val('');
+
     addNewTodo(name);
-    //$.post("/api/data?todo=" + name, function (data) {
-    //    getAllList();
-    //});
 });
 
 var current_index;
@@ -26,10 +23,6 @@ $('body').on('click', '.todoId', function (e) {
     current_index = current_name.substr(current_name.indexOf('_') + 1);
     
     getTodoById(current_index);
-    //$.get("/api/data?id=" + current_index, function (data) {
-    //    $('#name-todo').val(data);
-    //});
-
 });
 
 
@@ -39,12 +32,6 @@ $('body').on('click', '#btn-save', function (e) {
     $('#name-todo').val('');
 
     replaceTodo(current_index, name);
-    //$.get("/api/data?id=" + current_index, function (data) {
-    //    $.post("/api/data?oldTodo=" + data + "&newTodo=" + name, function () {
-    //        getAllList();
-    //    });
-    //});
-
 });
 
 $('body').on('click', '#btn-delete', function (e) {
@@ -52,25 +39,12 @@ $('body').on('click', '#btn-delete', function (e) {
     $('#name-todo').val('');
 
     deleteTodo(current_index);
-    //$.get("/api/data?id=" + current_index, function (data) {
-    //    $.get("/api/data?todo=" + data, function () {
-    //        getAllList();
-    //    });
-    //});
-
 });
 
 
 $('body').on('click', '#btn-up', function (e) {
     if (current_index > 0) {
-
         removeUp(current_index);
-        //$.get("/api/data?id=" + current_index, function (data) {
-        //    $.get("/api/data?todo=" + data + "&direction=false", function () {
-        //        getAllList();
-        //    });
-        //});
-
         current_index--;
     }
 });
@@ -81,25 +55,9 @@ $('body').on('click', '#btn-down', function (e) {
         var count = data.length;
 
         if (current_index < count - 1) {
-
             removeDown(current_index);
-            //$.get("/api/data?id=" + current_index, function (data) {
-            //    $.get("/api/data?todo=" + data + "&direction=true", function () {
-            //        getAllList();
-            //    });
-            //});
-
             current_index++;
         }
     })
 });
 
-
-//function getAllList() {
-//    $.get("/api/data", function (data) {
-//        fillUL(data);
-//    })
-//    .fail(function () {
-
-//    });
-//}
