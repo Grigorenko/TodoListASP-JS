@@ -22,8 +22,10 @@ function deleteTodo(current_index) {
     $.get("/api/data?id=" + current_index, function (data) {
         $.get("/api/data?todo=" + data, function () {
             getAllList();
+            getTodoById(current_index);
         });
     });
+    
 }
 
 function removeUp(current_index) {
@@ -45,8 +47,5 @@ function removeDown(current_index) {
 function getAllList() {
     $.get("/api/data", function (data) {
         fillUL(data);
-    })
-    .fail(function () {
-
     });
 }

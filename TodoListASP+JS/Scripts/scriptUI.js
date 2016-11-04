@@ -18,10 +18,9 @@ $('body').on('click', '#btn-add', function (e) {
 var current_index;
 $('body').on('click', '.todoId', function (e) {
     $('#toolbar').css('display', "block");
-    console.log(e);
     var current_name = e.target.id;
     current_index = current_name.substr(current_name.indexOf('_') + 1);
-    
+    console.log($('li.todoId').next('li'));
     getTodoById(current_index);
 });
 
@@ -35,7 +34,6 @@ $('body').on('click', '#btn-save', function (e) {
 });
 
 $('body').on('click', '#btn-delete', function (e) {
-    $('#toolbar').css('display', "none");
     $('#name-todo').val('');
 
     deleteTodo(current_index);

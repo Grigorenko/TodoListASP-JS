@@ -16,12 +16,18 @@ namespace TodoListASP_JS.Models
         {
             ICollection<string> list = new List<string>();
 
-            using (StreamReader stream = new StreamReader(new FileStream(path, FileMode.Open)))
+            try
             {
-                while (stream.Peek() != -1)
+                using (StreamReader stream = new StreamReader(new FileStream(path, FileMode.Open)))
                 {
-                    list.Add(stream.ReadLine());
+                    while (stream.Peek() != -1)
+                    {
+                        list.Add(stream.ReadLine());
+                    }
                 }
+            }
+            catch (System.Exception)
+            {
             }
 
             return list;
@@ -30,14 +36,20 @@ namespace TodoListASP_JS.Models
         public string GetById(int id)
         {
             string result = "";
-
-            using (StreamReader stream = new StreamReader(new FileStream(path, FileMode.Open)))
+            System.Threading.Thread.Sleep(50);
+            try
             {
-                for (int i = 0; i < id; i++)
+                using (StreamReader stream = new StreamReader(new FileStream(path, FileMode.Open)))
                 {
-                    stream.ReadLine();
+                    for (int i = 0; i < id; i++)
+                    {
+                        stream.ReadLine();
+                    }
+                    result = stream.ReadLine();
                 }
-                result = stream.ReadLine();
+            }
+            catch (System.Exception)
+            {
             }
 
             return result;
@@ -45,9 +57,15 @@ namespace TodoListASP_JS.Models
 
         public void Add(string todo)
         {
-            using (StreamWriter stream = new StreamWriter(new FileStream(path, FileMode.Append)))
+            try
             {
-                stream.WriteLine(todo);
+                using (StreamWriter stream = new StreamWriter(new FileStream(path, FileMode.Append)))
+                {
+                    stream.WriteLine(todo);
+                }
+            }
+            catch (System.Exception)
+            {
             }
         }
 
@@ -78,61 +96,85 @@ namespace TodoListASP_JS.Models
         {
             ICollection<string> list = new List<string>();
 
-            using (StreamReader stream = new StreamReader(new FileStream(path, FileMode.Open)))
+            try
             {
-                while (stream.Peek() != -1)
+                using (StreamReader stream = new StreamReader(new FileStream(path, FileMode.Open)))
                 {
-                    var temp = stream.ReadLine();
-
-                    if (temp != todo)
+                    while (stream.Peek() != -1)
                     {
-                        list.Add(temp);
+                        var temp = stream.ReadLine();
+
+                        if (temp != todo)
+                        {
+                            list.Add(temp);
+                        }
                     }
                 }
+                Replace(list);
             }
-            Replace(list);
+            catch (System.Exception)
+            {
+            }
         }
 
         public void RemoveDown(string todo)
         {
             List<string> list = (List<string>)GetList();
 
-            for (int i = 0; i < list.Count; i++)
+            try
             {
-                if (list[i] == todo)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    list[i] = list[i + 1];
-                    list[i + 1] = todo;
-                    break;
+                    if (list[i] == todo)
+                    {
+                        list[i] = list[i + 1];
+                        list[i + 1] = todo;
+                        break;
+                    }
                 }
+                Replace(list);
             }
-            Replace(list);
+            catch (System.Exception)
+            {
+            }
         }
 
         public void RemoveUp(string todo)
         {
             List<string> list = (List<string>)GetList();
 
-            for (int i = 0; i < list.Count; i++)
+            try
             {
-                if (list[i] == todo)
+                for (int i = 0; i < list.Count; i++)
                 {
-                    list[i] = list[i - 1];
-                    list[i - 1] = todo;
-                    break;
+                    if (list[i] == todo)
+                    {
+                        list[i] = list[i - 1];
+                        list[i - 1] = todo;
+                        break;
+                    }
                 }
+                Replace(list);
             }
-            Replace(list);
+            catch (System.Exception)
+            {
+            }
         }
 
         private void Replace(ICollection<string> list)
         {
-            using (StreamWriter stream = new StreamWriter(new FileStream(path, FileMode.Create)))
+            try
             {
-                foreach (var item in list)
+                using (StreamWriter stream = new StreamWriter(new FileStream(path, FileMode.Create)))
                 {
-                    stream.WriteLine(item);
+                    foreach (var item in list)
+                    {
+                        stream.WriteLine(item);
+                    }
                 }
+            }
+            catch (System.Exception)
+            {
             }
         }
     }
