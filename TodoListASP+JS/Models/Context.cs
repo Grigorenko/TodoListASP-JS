@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Web.Hosting;
 
 namespace TodoListASP_JS.Models
 {
     public class Context
     {
-        private string path = @"C:\Users\Vetal\Desktop\file.txt";
+        private string path;
+        public Context()
+        {
+            path = HostingEnvironment.MapPath("~/App_Data/file.txt");
+        }
 
         public ICollection<string> GetList()
         {
